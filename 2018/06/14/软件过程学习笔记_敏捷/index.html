@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="学习笔记,软件过程," />
+  <meta name="keywords" content="软件过程,学习笔记," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="概述；敏捷和精益方法；敏捷方法；瀑布模型；迭代和增量">
-<meta name="keywords" content="学习笔记,软件过程">
+<meta name="keywords" content="软件过程,学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="软件过程学习笔记_敏捷">
 <meta property="og:url" content="https://yzbrlan.github.io/2018/06/14/软件过程学习笔记_敏捷/index.html">
@@ -342,6 +342,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/14/软件过程学习笔记_敏捷/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/06/14/软件过程学习笔记_敏捷/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -424,9 +434,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
-          
             <a href="/tags/软件过程/" rel="tag"># 软件过程</a>
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
           
         </div>
       
@@ -481,6 +491,9 @@
           
 
   
+    <div class="comments" id="comments">
+    </div>
+  
 
 
 
@@ -532,7 +545,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -772,6 +785,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'cyhgTAgBl0BJtMI7tEQMkHdm-gzGzoHsz',
+        appKey: '0zY7Y2F0CaI0JYxni2y7petY',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
