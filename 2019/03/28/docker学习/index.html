@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Sherlock的成长之路">
 <meta property="og:description" content="一些学习Docker的过程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-28T13:15:24.904Z">
+<meta property="og:updated_time" content="2019-03-28T16:24:08.963Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker学习">
 <meta name="twitter:description" content="一些学习Docker的过程">
@@ -389,8 +389,27 @@
       
 
       
-        <h2 id="docker-组成"><a href="#docker-组成" class="headerlink" title="docker 组成"></a>docker 组成</h2><p>镜像 image，容器 container，网络 network，数据卷 volume</p>
-<h3 id="image"><a href="#image" class="headerlink" title="image"></a>image</h3><p>只读的文件包，包含了虚拟环境运行的最原始文件系统的内容</p>
+        <h3 id="docker-的技术实现"><a href="#docker-的技术实现" class="headerlink" title="docker 的技术实现"></a>docker 的技术实现</h3><p>命名空间，控制组（CGgroups），联合文件系统（union file system）</p>
+<ul>
+<li>CGgroups：资源的隔离和资源的分配</li>
+</ul>
+<h3 id="docker-组成"><a href="#docker-组成" class="headerlink" title="docker 组成"></a>docker 组成</h3><p>镜像 image，容器 container，网络 network，数据卷 volume</p>
+<ul>
+<li>image:只读的文件包，包含了虚拟环境运行的最原始文件系统的内容</li>
+<li>数据卷:为保证数据的独立性，可以基于 docker 的 unionfs，建立独立的目录持久存放数据，或者在文件中共享；通过这几种方式实现持久化，或者数据共享，我们称之为数据卷</li>
+<li>container：启动与 PID 为 1 的进程共生命；写时复制的机制，启动时，利用 unionfs 将镜像以只读的方式挂载到沙盒文件中。</li>
+</ul>
+<p>优势：利用 AUFS 对镜像进行增量更新，方便共用镜像；写时复制更快</p>
+<h3 id="docker-指令"><a href="#docker-指令" class="headerlink" title="docker 指令"></a>docker 指令</h3><blockquote>
+<p>镜像<br>启动：sudo systemctl start docker<br>开机自启动：sudo systemctl enable docker<br>docker pull <name>(默认为 latest 版本)<br>docker images<br>docker info<br>docker inspect <a href="name:version" target="_blank" rel="noopener">name:version</a><br>docker search <a href="name:version" target="_blank" rel="noopener">name:version</a><br>docker rmi <a href="name:version" target="_blank" rel="noopener">name:version</a></name></p>
+</blockquote>
+<blockquote>
+<p>容器<br>创建：docker create –name <name> <a href="name:version" target="_blank" rel="noopener">name:version</a><br>docker start name<br>docker run –name <name> -d <a href="name:version" target="_blank" rel="noopener">name:version</a>(合并指令，run 为前台，-d 转为后台运行)</name></name></p>
+</blockquote>
+<blockquote>
+<p>docker rm <name>(docker 记得随用随删))<br>docker ps<br>docker ps -a<br>进入容器启动 bash：docker exec -it <name> bash<br>nginx -s top/quit(进入后停止)<br>exit(进入后退出)</name></name></p>
+</blockquote>
+<p>(network 暴露接口)(<a href="https://blog.csdn.net/Michaelwubo/article/details/82493006" target="_blank" rel="noopener">https://blog.csdn.net/Michaelwubo/article/details/82493006</a>)</p>
 
       
     </div>
@@ -537,7 +556,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -570,7 +589,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-组成"><span class="nav-number">1.</span> <span class="nav-text">docker 组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#image"><span class="nav-number">1.1.</span> <span class="nav-text">image</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-的技术实现"><span class="nav-number">1.</span> <span class="nav-text">docker 的技术实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-组成"><span class="nav-number">2.</span> <span class="nav-text">docker 组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-指令"><span class="nav-number">3.</span> <span class="nav-text">docker 指令</span></a></li></ol></div>
             
 
           </div>
