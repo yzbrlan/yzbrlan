@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="日历设计,日历实验," />
+  <meta name="keywords" content="LeetCode,回溯法," />
 
 
 
@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="关于增加代办事项功能的日历，详述设计思路和实验过程">
-<meta name="keywords" content="日历设计,日历实验">
+<meta name="description" content="记录一下回溯法中的经典题目">
+<meta name="keywords" content="LeetCode,回溯法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="待办事项日历的设计、实验文档">
-<meta property="og:url" content="https://yzbrlan.github.io/2018/04/25/日历设计与实验/index.html">
+<meta property="og:title" content="LeetCode回溯法题目">
+<meta property="og:url" content="https://yzbrlan.github.io/2019/04/06/LeetCode回溯法题目/index.html">
 <meta property="og:site_name" content="Sherlock的成长之路">
-<meta property="og:description" content="关于增加代办事项功能的日历，详述设计思路和实验过程">
+<meta property="og:description" content="记录一下回溯法中的经典题目">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://yzbrlan.github.io/2018/04/25/日历设计与实验/lab3设计文档/calendar.png">
-<meta property="og:updated_time" content="2019-03-28T13:12:18.689Z">
+<meta property="og:updated_time" content="2019-04-06T11:01:27.546Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="待办事项日历的设计、实验文档">
-<meta name="twitter:description" content="关于增加代办事项功能的日历，详述设计思路和实验过程">
-<meta name="twitter:image" content="https://yzbrlan.github.io/2018/04/25/日历设计与实验/lab3设计文档/calendar.png">
+<meta name="twitter:title" content="LeetCode回溯法题目">
+<meta name="twitter:description" content="记录一下回溯法中的经典题目">
 
 
 
@@ -122,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://yzbrlan.github.io/2018/04/25/日历设计与实验/"/>
+  <link rel="canonical" href="https://yzbrlan.github.io/2019/04/06/LeetCode回溯法题目/"/>
 
 
 
 
 
-  <title>待办事项日历的设计、实验文档 | Sherlock的成长之路</title>
+  <title>LeetCode回溯法题目 | Sherlock的成长之路</title>
   
 
 
@@ -277,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yzbrlan.github.io/2018/04/25/日历设计与实验/">
+    <link itemprop="mainEntityOfPage" href="https://yzbrlan.github.io/2019/04/06/LeetCode回溯法题目/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yzbrlan">
@@ -294,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">待办事项日历的设计、实验文档</h1>
+          <h1 class="post-title" itemprop="name headline">LeetCode回溯法题目</h1>
         
 
         <div class="post-meta">
@@ -306,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-25T13:51:39+08:00">
-                2018-04-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-06T18:52:07+08:00">
+                2019-04-06
               </time>
             
 
@@ -329,8 +327,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/课程实验/" itemprop="url" rel="index">
-                    <span itemprop="name">课程实验</span>
+                  <a href="/categories/算法学习/" itemprop="url" rel="index">
+                    <span itemprop="name">算法学习</span>
                   </a>
                 </span>
 
@@ -347,8 +345,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/25/日历设计与实验/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/04/25/日历设计与实验/" itemprop="commentCount"></span>
+                <a href="/2019/04/06/LeetCode回溯法题目/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/06/LeetCode回溯法题目/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -356,7 +354,7 @@
 
           
           
-             <span id="/2018/04/25/日历设计与实验/" class="leancloud_visitors" data-flag-title="待办事项日历的设计、实验文档">
+             <span id="/2019/04/06/LeetCode回溯法题目/" class="leancloud_visitors" data-flag-title="LeetCode回溯法题目">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -374,7 +372,7 @@
 
           
               <div class="post-description">
-                  关于增加代办事项功能的日历，详述设计思路和实验过程
+                  记录一下回溯法中的经典题目
               </div>
           
 
@@ -391,70 +389,34 @@
       
 
       
-        <h2 id="界面设计"><a href="#界面设计" class="headerlink" title="界面设计"></a>界面设计</h2><p>如图所示。在日历的右侧设置了事项面板，并且根据按照全天和自定义的方式分别设置了两个框图，在下方是显示事件的栏目。</p>
-<p><img src="/2018/04/25/日历设计与实验/lab3设计文档/calendar.png" alt="日历UI"><br>左侧显示的是日历，当成功添加一个事件，对应的日期变为黄色。当删除一个事件的时候，变回原来的颜色。</p>
-<p>点击左侧日期时，按钮变为灰色，并且全天事项变为当天。如果当天有事项，就在下方显示出对应的事项。</p>
-<h2 id="代办事项功能设计"><a href="#代办事项功能设计" class="headerlink" title="代办事项功能设计"></a>代办事项功能设计</h2><p>待办事项是一个独立的功能，因此可以重写一个 CalendarItem 类，DateChooser 类，ItemUtil 类来控制这个功能。</p>
-<h3 id="CalendarItem-类"><a href="#CalendarItem-类" class="headerlink" title="CalendarItem 类"></a>CalendarItem 类</h3><blockquote>
-<p>该类继承自 CalendarDate 类，表示日历中会用到的事项，并且提供了几个属性 :Date start,Date end 分别表示开始的日期和结束的日期；属性 text 保存相关的待办事项；</p>
-</blockquote>
-<table><br>        <tr><br>            <th>方法名</th><br>            <th>方法描述</th><br>        </tr><br>        <tr><br>            <th>CalendarItem(Date start, Date end, String text)</th><br>            <th>参数为代办事项的开始时间以及结束时间，输入的Date对象为null，或者text为null，那么就抛出异常（CalendarException）</th><br>        </tr><br></table>
-
-<h3 id="ItemUtil-类"><a href="#ItemUtil-类" class="headerlink" title="ItemUtil 类"></a>ItemUtil 类</h3><blockquote>
-<p>该类是工具类，提供事项和日期相关的一些计算和判断方法。该构造函数已经被声明为 private，因此不可以实例化。属性 list<calendaritem>属于 static，得到保存的事项列表。</calendaritem></p>
-</blockquote>
-<table><br>    <tr><br>        <th>方法名</th><br>        <th>方法描述</th><br>    </tr><br>    <tr><br>        <th>checkInTime(Date start, Date end, CalendarItem item)</th><br>        <th>参数为查询的日期，以及事项，返回值为boolean值。当事项的时间与输入的时间段有交叉部分时2，返回true。注意：当输入的对象全部为null，或者开始时间大于结束时间的时候，返回false。</th><br>    </tr><br>    <tr><br>        <th>hasItem(Date start)</th><br>        <th>参数为一天的年月日，返返回值为boolean值。判断这一天是否有项目，这个是用于更新面板时的动作。如果这一天有事项存在，那么返回true。<br>注意：当输入的对象为null时，返回false。</th><br>    </tr><br>    <tr><br>        <th>getItems(DateChooser chooser)</th><br>        <th>参数为DateChooser面板类型的对象，返回值为List<calendaritem>。输入需要查询的面板类型，从中可以得到面板上的时间，从而得到在该时间段所有的事列表。<br>注意：当输入的chooser对象为null，返回null。</calendaritem></th><br>    </tr><br>    <tr><br>        <th>formmat(Date date)</th><br>        <th>参数为日期对象，返回值为Date对象。主要作用是将这个日期设置为当天的23：59分。<br>注意：当传入的参数为null时，返回null</th><br>    </tr><br></table>
-
-<h3 id="DateChooser-类"><a href="#DateChooser-类" class="headerlink" title="DateChooser 类"></a>DateChooser 类</h3><blockquote>
-<p>继承自 JPanl，这是一个定制化的面板，定制化 JSpinner 对象，用于选择日期，还有查询按钮和添加事件的按钮。因为全天设置查询和自定义的设置查询不同，因此日期选择的行为也不同，也就是选择器上显示的日期不同。</p>
-</blockquote>
-<table><br>    <tr><br>        <th>方法名</th><br>        <th>方法描述</th><br>    </tr><br>    <tr><br>        <th>DateChooser(int select)</th><br>        <th>输入为int值，1或者2，分别代表是全天查询还是任意查询。</th><br>    </tr><br>    <tr><br>        <th>setText(Date startDate, Date endDate)</th><br>        <th>参数为开始时间和结束时间，用于设置时间选择器上的日期显示，没有返回值。如果输入的时间为null，或者不符合逻辑，那么将日期重新设置为今天。</th><br>    </tr><br></table>
-
-<h2 id="实验报告"><a href="#实验报告" class="headerlink" title="实验报告"></a>实验报告</h2><h4 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h4><p>待办事项是一个独立的功能，因此可以重写一个 CalendarItem 类，DateChooser 类，ItemUtil 类来控制这个功能。</p>
-<p>CalendarItem 类是一个保存有关事项的类，里面主要保存事件的开始时间和结束时间，以及内容。每次成功创立一个事件之后，都 new 一个 CalendarItem 对象，并且将它保存在一个 Static 的 list 列表中。</p>
-<p>ItemUtil 类是一个工具类，构造函数已经被 private 修饰，因此不能实例化。里面封装了和事项有关的各种工具。这个类主要被 DateChooser 类调用。</p>
-<p>DateChooser 类继承自 JPanel，这是一个定制化的面板，设置了两个 JSpinner 的对象，用于选择日期，还有查询按钮和添加事件的按钮。因为全天设置查询和自定义的设置查询不同，因此日期选择的行为也不同。</p>
-<p>事项的面板和日历的属于不同的个体，在上面进行操作，两者的联系便在于开始日期和结束日期。因为在日历面板的上方可以得到当前年月，因此二者可以顺利的匹配。</p>
-<h4 id="设计亮点"><a href="#设计亮点" class="headerlink" title="设计亮点"></a>设计亮点</h4><p>此次设计主要有以下亮点：</p>
+        <h3 id="SubSet"><a href="#SubSet" class="headerlink" title="SubSet"></a>SubSet</h3><p>Given a set of distinct integers, S, return all possible subsets.</p>
+<p>Note:</p>
+<p>Elements in a subset must be in non-descending order.<br>The solution set must not contain duplicate subsets.</p>
+<p>For example,<br>If S =[1,2,3], a solution is:</p>
 <blockquote>
-<ul>
-<li>面板设置人性化，较为合理。在日历的右侧设置了事项面板，并且根据按照全天和自定义的方式分别设置了两个框图，在下方是显示事件的栏目，一目了然。</li>
-<li>用户交互十分友好。按照逻辑，显然开始时间必须小于等于结束时间，因此动态监听了时间选择器的内容改变事件。当结束时间小于开始的时候，就<strong>自动将结束时间调整为开始时间</strong>，极大地避免了用户因为失误而造成的逻辑混乱。</li>
-<li>时间选择器的设置。此次学习到采用定制的<strong>JSpinner 组件</strong>十分的方便快捷。如下所示，windows 的内部也是采用这个模型，显然十分的简捷和方便，易于编辑并且选择。对于用户的错误输入，他可以自行处理为正确的，比如超过合理的输入，它可以自动进行时分的运算，转换为对应的第二天；或者选择没有反应。</li>
-</ul>
+<p>[<br>[3],<br>[1],<br>[2],<br>[1,2,3],<br>[1,3],<br>[2,3],<br>[1,2],<br>[]<br>]</p>
 </blockquote>
-<pre><code>//获得时间日期模型
-SpinnerDateModel model = new SpinnerDateModel();
-//获得JSPinner对象
-JSpinner year = new JSpinner(model);
-year.setValue(new Date());
-</code></pre><h4 id="设计遗憾"><a href="#设计遗憾" class="headerlink" title="设计遗憾"></a>设计遗憾</h4><blockquote>
-<ul>
-<li>由于对 swing 组件的错误认知，导致界面上有许多可以继续改进的地方。比如颜色形状等。</li>
-<li>查询事件的时候，在下方的框内显示事项不怎么友好。因为时间原因，并且对于 swing 的 Box 布局不熟，多个事项往往会溢出整个 frame；并且当添加的事项内容过多的时候，只能查看到一部分。这些都是需要改进的地方。</li>
-</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; subsets(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    backtrack(list, <span class="keyword">new</span> ArrayList&lt;&gt;(), nums, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; list , List&lt;Integer&gt; tempList, <span class="keyword">int</span> [] nums, <span class="keyword">int</span> start)</span></span>&#123;</span><br><span class="line">    list.add(<span class="keyword">new</span> ArrayList&lt;&gt;(tempList));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt; nums.length; i++)&#123;</span><br><span class="line">        tempList.add(nums[i]);</span><br><span class="line">        backtrack(list, tempList, nums, i + <span class="number">1</span>);</span><br><span class="line">        tempList.remove(tempList.size() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="SubSet-ii"><a href="#SubSet-ii" class="headerlink" title="SubSet-ii"></a>SubSet-ii</h3><p>Given a collection of integers that might contain duplicates, S, return all possible subsets.</p>
+<p>Note:</p>
+<p>Elements in a subset must be in non-descending order.<br>The solution set must not contain duplicate subsets.</p>
+<p>For example,<br>If S =[1,2,2], a solution is:</p>
+<blockquote>
+<p>[<br>[2],<br>[1],<br>[1,2,2],<br>[2,2],<br>[1,2],<br>[]<br>]</p>
 </blockquote>
-<h4 id="所遇问题及解决方法"><a href="#所遇问题及解决方法" class="headerlink" title="所遇问题及解决方法"></a>所遇问题及解决方法</h4><blockquote>
-<ol>
-<li>如何处理全天和自定义日期之间的关系？</li>
-</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; subsetsWithDup(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    backtrack(list, <span class="keyword">new</span> ArrayList&lt;&gt;(), nums, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; list, List&lt;Integer&gt; tempList, <span class="keyword">int</span> [] nums, <span class="keyword">int</span> start)</span></span>&#123;</span><br><span class="line">    list.add(<span class="keyword">new</span> ArrayList&lt;&gt;(tempList));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt; nums.length; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i &gt; start &amp;&amp; nums[i] == nums[i-<span class="number">1</span>]) <span class="keyword">continue</span>; <span class="comment">// skip duplicates</span></span><br><span class="line">        tempList.add(nums[i]);</span><br><span class="line">        backtrack(list, tempList, nums, i + <span class="number">1</span>);</span><br><span class="line">        tempList.remove(tempList.size() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Permutations"><a href="#Permutations" class="headerlink" title="Permutations"></a>Permutations</h3><p>Given a collection of numbers, return all possible permutations.</p>
+<p>For example,<br>[1,2,3]have the following permutations:</p>
+<blockquote>
+<p>[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2], and[3,2,1].</p>
 </blockquote>
-<pre><code>`因为按照全天和自定义的日期进行操作，在本质上相同，都是有着开始和结束时间。因此可以将两者归为一类进行事件的处理。将全天的开始时间设为00：00，结束设为23：59，就可以和自定义的用同一种事件处理机制。`
-</code></pre><blockquote>
-<ol>
-<li>如何设置时间选择器？</li>
-</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; permute(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">   List&lt;List&lt;Integer&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">   <span class="comment">// Arrays.sort(nums); // not necessary</span></span><br><span class="line">   backtrack(list, <span class="keyword">new</span> ArrayList&lt;&gt;(), nums);</span><br><span class="line">   <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; list, List&lt;Integer&gt; tempList, <span class="keyword">int</span> [] nums)</span></span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(tempList.size() == nums.length)&#123;</span><br><span class="line">      list.add(<span class="keyword">new</span> ArrayList&lt;&gt;(tempList));</span><br><span class="line">   &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">         <span class="keyword">if</span>(tempList.contains(nums[i])) <span class="keyword">continue</span>; <span class="comment">// element already exists, skip</span></span><br><span class="line">         tempList.add(nums[i]);</span><br><span class="line">         backtrack(list, tempList, nums);</span><br><span class="line">         tempList.remove(tempList.size() - <span class="number">1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Permutations-ii"><a href="#Permutations-ii" class="headerlink" title="Permutations-ii"></a>Permutations-ii</h3><p>Given a collection of numbers that might contain duplicates, return all possible unique permutations.</p>
+<p>For example,<br>[1,1,2]have the following unique permutations:</p>
+<blockquote>
+<p>[1,1,2],[1,2,1], and[2,1,1].</p>
 </blockquote>
-<pre><code>`想了很多种方法，最简单的就是直接设置两个TexxtField框，让用户进行文本的输入，再次进行判断。可是这样对于用户很不友好，因为需要输入的文本过长，因此可能导致错误的输入。因此采用**JSpinner的组件**，用户既可以输入，也可以点击两旁的按钮进行选择；并且可以处理用户的错误输入，比如超过合理的输入，它可以自动进行时分的运算，转换为对应的第二天；或者不反应。`
-</code></pre><blockquote>
-<ol>
-<li>点击删除按钮的时候，如何正确删除事件？</li>
-</ol>
-</blockquote>
-<pre><code>`因为需要将删除按钮和事件进行绑定，因此需要得到delete按钮的属性。e.getSource得到的是一个event，我一开始无论如何都无法得到事件源的属性。最终终于得到一个方法，就是将event强制转化为JButton类型，才解决问题。`
-</code></pre><h4 id="Test-类的修改说明"><a href="#Test-类的修改说明" class="headerlink" title="Test 类的修改说明"></a>Test 类的修改说明</h4><ul>
-<li>新的测试改变了工具类 ItemUtil 类的测试用例，因为重新定义了用户输入日期的组件，并且组件可以自动判断自身的合法性，因此无需再重新鉴定输入的合法。</li>
-</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; permuteUnique(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    backtrack(list, <span class="keyword">new</span> ArrayList&lt;&gt;(), nums, <span class="keyword">new</span> <span class="keyword">boolean</span>[nums.length]);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; list, List&lt;Integer&gt; tempList, <span class="keyword">int</span> [] nums, <span class="keyword">boolean</span> [] used)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(tempList.size() == nums.length)&#123;</span><br><span class="line">        list.add(<span class="keyword">new</span> ArrayList&lt;&gt;(tempList));</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(used[i] || i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i-<span class="number">1</span>] &amp;&amp; !used[i - <span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">            used[i] = <span class="keyword">true</span>;</span><br><span class="line">            tempList.add(nums[i]);</span><br><span class="line">            backtrack(list, tempList, nums, used);</span><br><span class="line">            used[i] = <span class="keyword">false</span>;</span><br><span class="line">            tempList.remove(tempList.size() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -472,9 +434,9 @@ year.setValue(new Date());
       
         <div class="post-tags">
           
-            <a href="/tags/日历设计/" rel="tag"># 日历设计</a>
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
           
-            <a href="/tags/日历实验/" rel="tag"># 日历实验</a>
+            <a href="/tags/回溯法/" rel="tag"># 回溯法</a>
           
         </div>
       
@@ -487,15 +449,15 @@ year.setValue(new Date());
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/03/28/docker学习/" rel="next" title="Docker学习">
+                <i class="fa fa-chevron-left"></i> Docker学习
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/27/make学习笔记/" rel="prev" title="Make学习">
-                Make学习 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -634,7 +596,7 @@ year.setValue(new Date());
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#界面设计"><span class="nav-number">1.</span> <span class="nav-text">界面设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代办事项功能设计"><span class="nav-number">2.</span> <span class="nav-text">代办事项功能设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CalendarItem-类"><span class="nav-number">2.1.</span> <span class="nav-text">CalendarItem 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ItemUtil-类"><span class="nav-number">2.2.</span> <span class="nav-text">ItemUtil 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DateChooser-类"><span class="nav-number">2.3.</span> <span class="nav-text">DateChooser 类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验报告"><span class="nav-number">3.</span> <span class="nav-text">实验报告</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设计思路"><span class="nav-number">3.0.1.</span> <span class="nav-text">设计思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计亮点"><span class="nav-number">3.0.2.</span> <span class="nav-text">设计亮点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计遗憾"><span class="nav-number">3.0.3.</span> <span class="nav-text">设计遗憾</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#所遇问题及解决方法"><span class="nav-number">3.0.4.</span> <span class="nav-text">所遇问题及解决方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-类的修改说明"><span class="nav-number">3.0.5.</span> <span class="nav-text">Test 类的修改说明</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SubSet"><span class="nav-number">1.</span> <span class="nav-text">SubSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SubSet-ii"><span class="nav-number">2.</span> <span class="nav-text">SubSet-ii</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Permutations"><span class="nav-number">3.</span> <span class="nav-text">Permutations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Permutations-ii"><span class="nav-number">4.</span> <span class="nav-text">Permutations-ii</span></a></li></ol></div>
             
 
           </div>
