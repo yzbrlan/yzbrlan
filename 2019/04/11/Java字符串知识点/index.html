@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="String,intern," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sherlock的成长之路">
-<meta property="og:url" content="https://yzbrlan.github.io/tags/华为笔试/index.html">
+<meta name="description" content="Java intern() 方法首先，对于不是 new 的字符串，如果是静态字符串，那么会直接添加到常量池中，如 str3；如果带有变量，那么不会入常量池，比如 str4。 str.intern()，内容与字符串相同，但一定取自具有唯一字符串的池。也就是说，每次到常量池中找字符串，如果存在，返回引用，不存在，添加后返回引用。 1234567String str1=&quot;a&quot;;String str2=&quot;">
+<meta name="keywords" content="String,intern">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java字符串相关知识点">
+<meta property="og:url" content="https://yzbrlan.github.io/2019/04/11/Java字符串知识点/index.html">
 <meta property="og:site_name" content="Sherlock的成长之路">
+<meta property="og:description" content="Java intern() 方法首先，对于不是 new 的字符串，如果是静态字符串，那么会直接添加到常量池中，如 str3；如果带有变量，那么不会入常量池，比如 str4。 str.intern()，内容与字符串相同，但一定取自具有唯一字符串的池。也就是说，每次到常量池中找字符串，如果存在，返回引用，不存在，添加后返回引用。 1234567String str1=&quot;a&quot;;String str2=&quot;">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-11T15:51:53.114Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sherlock的成长之路">
+<meta name="twitter:title" content="Java字符串相关知识点">
+<meta name="twitter:description" content="Java intern() 方法首先，对于不是 new 的字符串，如果是静态字符串，那么会直接添加到常量池中，如 str3；如果带有变量，那么不会入常量池，比如 str4。 str.intern()，内容与字符串相同，但一定取自具有唯一字符串的池。也就是说，每次到常量池中找字符串，如果存在，返回引用，不存在，添加后返回引用。 1234567String str1=&quot;a&quot;;String str2=&quot;">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://yzbrlan.github.io/tags/华为笔试/"/>
+  <link rel="canonical" href="https://yzbrlan.github.io/2019/04/11/Java字符串知识点/"/>
 
 
 
 
 
-  <title>标签: 华为笔试 | Sherlock的成长之路</title>
+  <title>Java字符串相关知识点 | Sherlock的成长之路</title>
   
 
 
@@ -140,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <a href="https://github.com/yzbrlan"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 30;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
@@ -256,54 +261,194 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>华为笔试<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yzbrlan.github.io/2019/04/11/Java字符串知识点/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yzbrlan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sherlock的成长之路">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/04/10/字符串的展开/" itemprop="url">
-              
-                <span itemprop="name">字符串的展开题目</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Java字符串相关知识点</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-04-10T22:15:21+08:00"
-              content="2019-04-10" >
-          04-10
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-11T23:41:31+08:00">
+                2019-04-11
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java字符串/" itemprop="url" rel="index">
+                    <span itemprop="name">Java字符串</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/11/Java字符串知识点/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/11/Java字符串知识点/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/04/11/Java字符串知识点/" class="leancloud_visitors" data-flag-title="Java字符串相关知识点">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Java-intern-方法"><a href="#Java-intern-方法" class="headerlink" title="Java intern() 方法"></a>Java intern() 方法</h2><p>首先，对于不是 new 的字符串，如果是静态字符串，那么会直接添加到常量池中，如 str3；如果带有变量，那么不会入常量池，比如 str4。</p>
+<p>str.intern()，内容与字符串相同，但一定取自具有唯一字符串的池。也就是说，每次到常量池中找字符串，如果存在，返回引用，不存在，添加后返回引用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String str1=<span class="string">"a"</span>;</span><br><span class="line">String str2=<span class="string">"b"</span>;</span><br><span class="line">String str3=<span class="string">"a"</span>+<span class="string">"b"</span>;</span><br><span class="line">String str4=str1+str2;</span><br><span class="line">String str5=<span class="keyword">new</span> String(<span class="string">"ab"</span>);</span><br><span class="line"></span><br><span class="line">str5.intern()==str3==str4.intern()</span><br></pre></td></tr></table></figure>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/String/" rel="tag"># String</a>
+          
+            <a href="/tags/intern/" rel="tag"># intern</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/11/unix shell/" rel="next" title="自制的unix shell">
+                <i class="fa fa-chevron-left"></i> 自制的unix shell
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -311,6 +456,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -331,8 +483,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -396,6 +557,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-intern-方法"><span class="nav-number">1.</span> <span class="nav-text">Java intern() 方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -552,6 +729,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
