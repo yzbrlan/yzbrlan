@@ -89,7 +89,8 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://yzbrlan.github.io/2019/04/11/unix%20shell/shell/pipe1.jpg">
 <meta property="og:image" content="https://yzbrlan.github.io/2019/04/11/unix%20shell/shell/pipe2.jpg">
-<meta property="og:updated_time" content="2019-04-11T15:51:22.472Z">
+<meta property="og:image" content="https://yzbrlan.github.io/2019/04/11/unix%20shell/shell/pipeshiyan.png">
+<meta property="og:updated_time" content="2019-04-16T02:41:19.415Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自制的unix shell">
 <meta name="twitter:description" content="实现了一个简易的Unix Shell，即实现了I/O重定向和管道。">
@@ -392,8 +393,7 @@
       
 
       
-        <p><strong>实验环境：</strong> centos<br><strong>提交文件：</strong> main.c ; a.out ; 实验文档</p>
-<h2 id="总体设计框架"><a href="#总体设计框架" class="headerlink" title="总体设计框架"></a>总体设计框架</h2><h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>I/O 重定向使得程序可以自由地指定数据的流向，不一定从键盘读取数据或输出结果到屏幕上。</p>
+        <h2 id="总体设计框架"><a href="#总体设计框架" class="headerlink" title="总体设计框架"></a>总体设计框架</h2><h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>I/O 重定向使得程序可以自由地指定数据的流向，不一定从键盘读取数据或输出结果到屏幕上。</p>
 <p>管道使得一条命令的输出可以作为另一条命令的输入，多条命令可以配合完成一项任务。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ pwd</span><br><span class="line">$ ls &gt; y</span><br><span class="line">$ ls | sort | uniq | wc</span><br><span class="line">$ cat &lt; y | sort | uniq | wc &gt; y1</span><br><span class="line">$ cat y1</span><br><span class="line">$ rm y1</span><br><span class="line">$ rm y</span><br></pre></td></tr></table></figure>
 <p>我们需要实现 $&lt; &gt; |$的基本功能。</p>
@@ -428,6 +428,7 @@
 <p>我们将运行整条命令的子进程称为进程 A，本文 shell 的实现中，进程 A 并不执行命令，而是再 fork 两个进程，称之为进程 left 和 right，分别执行两条命令。两个进程都从进程 A 继承了管道两端的连接，可通过该管道通信。进程 A 不再需要管道连接，于是关闭两个文件描述符，然后等待进程 left 和 right 执行完毕。</p>
 <h4 id="结果-1"><a href="#结果-1" class="headerlink" title="结果"></a>结果</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建管道</span></span><br><span class="line">        <span class="keyword">if</span> (pipe(p) == <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            perror(<span class="string">"pipe"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建left进程</span></span><br><span class="line">        <span class="keyword">if</span> (fork1() == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 关闭管道的读数据端</span></span><br><span class="line">            <span class="keyword">if</span> (close(p[<span class="number">0</span>]) == <span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                perror(<span class="string">"close"</span>);</span><br><span class="line">                <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (p[<span class="number">1</span>] != STDOUT_FILENO)</span><br><span class="line">            &#123; <span class="comment">// 防御性编程</span></span><br><span class="line">                <span class="comment">// 将标准输出重定向到管道的写数据端</span></span><br><span class="line">                <span class="keyword">if</span> (dup2(p[<span class="number">1</span>], STDOUT_FILENO) == <span class="number">-1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    perror(<span class="string">"dup2"</span>);</span><br><span class="line">                    <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            runcmd(pcmd-&gt;left);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建right进程</span></span><br><span class="line"><span class="keyword">if</span> (fork1() == <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 关闭管道的写数据端</span></span><br><span class="line">    <span class="keyword">if</span> (close(p[<span class="number">1</span>]) == <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">"close"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (p[<span class="number">0</span>] != STDIN_FILENO)</span><br><span class="line">    &#123; <span class="comment">// 防御性编程</span></span><br><span class="line">        <span class="comment">// 将标准输出重定向到管道的读数据端</span></span><br><span class="line">        <span class="keyword">if</span> (dup2(p[<span class="number">0</span>], STDIN_FILENO) == <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            perror(<span class="string">"dup2"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    runcmd(pcmd-&gt;right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/04/11/unix shell/shell/pipeshiyan.png" alt="shiyan"></p>
 <h2 id="实验感悟"><a href="#实验感悟" class="headerlink" title="实验感悟"></a>实验感悟</h2><p>对于重定向和管道的操作，都是对于文件描述的操作。</p>
 
       
@@ -559,7 +560,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -570,7 +571,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -581,7 +582,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
