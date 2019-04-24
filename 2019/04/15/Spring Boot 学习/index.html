@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Sherlock的成长之路">
 <meta property="og:description" content="关于学习Spring Boot的一些思考">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-15T12:01:23.700Z">
+<meta property="og:updated_time" content="2019-04-24T03:50:05.341Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Boot学习">
 <meta name="twitter:description" content="关于学习Spring Boot的一些思考">
@@ -389,12 +389,99 @@
       
 
       
-        <h2 id="Spring-Boot-特点"><a href="#Spring-Boot-特点" class="headerlink" title="Spring Boot 特点"></a>Spring Boot 特点</h2><ul>
-<li>是 Spring MVC 的升级版</li>
-<li>简化配置</li>
+        <h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><h2 id="Spring-Boot-特点"><a href="#Spring-Boot-特点" class="headerlink" title="Spring Boot 特点"></a>Spring Boot 特点</h2><ul>
+<li>是 Spring MVC 的升级版，没有必然的联系</li>
+<li>简化配置，编码，部署，监控</li>
 <li>是下一代框架</li>
-<li>入门级微框架，学习 SpringCloud 必须学会 SpringBoot</li>
+<li>入门级微框架，学习 SpringCloud 必须学会 SpringBoot，SpringCloud 建立在 boot 的基础之上</li>
 <li>学习 maven，Spring 的注解，restful API</li>
+</ul>
+<h3 id="属性配置"><a href="#属性配置" class="headerlink" title="属性配置"></a>属性配置</h3><p>两种配置方式，properties 和 yml。<br>yml 树状结构，对中文支持更好。</p>
+<p><strong>Server</strong></p>
+<ul>
+<li>port：默认 8080</li>
+<li>context-path：给路径加上前缀</li>
+</ul>
+<p><strong>自定义单项配置</strong></p>
+<p>在配置文件中写：</p>
+<pre><code>name: sherlock
+</code></pre><p>在 java 文件中用：声明 String 或者 Integer 就可以自动转</p>
+<pre><code>@Value(&quot;${name}&quot;)
+</code></pre><p>在配置文件中使用配置文件：</p>
+<pre><code>content：“name:${name},age${age}”
+</code></pre><p><strong>多项配置</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">person:</span><br><span class="line">    name: sherlock</span><br><span class="line">    age: 18</span><br></pre></td></tr></table></figure>
+<p>新建一个类，用@ConfigurationProperties(prefix=”person”)获取前缀是 person 的配置。注意@Component 成为 Bean。</p>
+<p>创建私有属性 name ,age ，get 和 set 等</p>
+<p>此时在使用的时候就不用@Value(“\${name}”)了，直接@Autowired，将新建的类自动导入即可。</p>
+<p><strong>生产和上线不同的环境</strong></p>
+<p>新建两个 yml 文件：application-dev.yml 和 application-prod.yml。</p>
+<p>在 application.yml 中配置：dev 或者 prod</p>
+<pre><code>spring.profiles.active：dev
+</code></pre><p>注意：在用命令行启动 jar 文件的时候，我们可以指定生产环境如下：</p>
+<pre><code>java -jar target/*.jar --spring.profiles.active=prod
+</code></pre><p>注意在 application.yml 中进行的配置，两个环境都可以使用</p>
+<h3 id="Controller-的使用"><a href="#Controller-的使用" class="headerlink" title="Controller 的使用"></a>Controller 的使用</h3><h4 id="映射-URL"><a href="#映射-URL" class="headerlink" title="映射 URL"></a>映射 URL</h4><p>用来接收用户端的请求</p>
+<ul>
+<li>@Controller：处理 http 请求。返回页面，配合模板来使用</li>
+<li>@RestController：是@Controller+@ResponseBody。返回 json。【推荐使用】</li>
+<li>@RequestMapping：配置 url 映射</li>
+</ul>
+<p>使用方式：</p>
+<ul>
+<li>可以给整个类指定 url，用@RequestMapping 再给方法指定 url</li>
+<li>url 可以是 json 模式{“/“,”/“}</li>
+<li>get 可以从 url 进行测试，测试 post 的时候，可以用 postman 来进行尝试</li>
+</ul>
+<h4 id="获取参数"><a href="#获取参数" class="headerlink" title="获取参数"></a>获取参数</h4><ul>
+<li>@PathVariable</li>
+<li>@RequestParam</li>
+</ul>
+<p>@<strong>PathVariable</strong><br>整个 url 非常的简洁</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">value=<span class="string">"/&#123;id&#125;/path"</span></span><br><span class="line"></span><br><span class="line">func(<span class="meta">@PathVariable</span>(<span class="string">"id"</span>) Integer id)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>@<strong>RequestParam</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">value=<span class="string">"/path"</span></span><br><span class="line"></span><br><span class="line">func(<span class="meta">@RequestParam</span>(<span class="string">"id"</span>) Integer myId)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//设置默认值</span></span><br><span class="line">func(<span class="meta">@RequestParam</span>(value=<span class="string">"id"</span>,required=<span class="keyword">false</span>,defaultValue=<span class="string">"0"</span>) Integer myId)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h3><p>Spring-Data-Jpa<br>JPA（Java Persistence API）：定义了一系列对象持久化的标准。</p>
+<ul>
+<li><p>jpa.hibernate.ddl-auto: create(运行的时候创建一张新的表)<br>: update (第一次运行的时候创建一张表，如果有数据会保留)，常用<br>：create-drop(应用停下来了，会删掉表)<br>：validate(验证数据库中和你的表是否一致)</p>
+</li>
+<li><p>jpa.show-sql: true</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span>(这个是将这个类映射为数据库中的一张表)</span><br><span class="line"></span><br><span class="line"><span class="meta">@Id</span></span><br><span class="line"><span class="meta">@GeneratedValue</span></span><br><span class="line"><span class="keyword">private</span> Integer id;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>创建表的实体，如上的 @Entity</li>
+<li>创建实体的 reposity</li>
+<li>创建 service，内嵌 reposity，对数据库的接口，进行再次包装</li>
+<li>创建 controller，构建 url，解析参数</li>
+</ol>
+<h4 id="Restful-接口"><a href="#Restful-接口" class="headerlink" title="Restful 接口"></a>Restful 接口</h4><ul>
+<li>get</li>
+<li>post：新加入</li>
+<li>put：更新，传入 id</li>
+<li>delete：删除</li>
+</ul>
+<h3 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理"></a>事务管理</h3><p>希望两条数据同时插入，要不然都不成功</p>
+<ul>
+<li><p>@Transactional：在 Service 中的方法上面加入@Transactional，事务注解，表示这个方法内的多条数据，或者一条数据如果失败，那么就回退。只有查询的时候不需要加入事务操作。</p>
+</li>
+<li><p>@Test<br>@Transactional<br>连在一起使用，可以达到回滚的目的？？也就是只用于测试，不真正的向数据库中插入</p>
+</li>
+</ul>
+<h1 id="web-进阶"><a href="#web-进阶" class="headerlink" title="web 进阶"></a>web 进阶</h1><p>还需要学习</p>
+<ul>
+<li>@Valid 表单验证</li>
+<li>AOP 处理请求</li>
+<li>AOP 统一异常处理</li>
+<li>单元测试</li>
+</ul>
+<p>待了解</p>
+<ul>
+<li>spring-data-jpa：关系型数据库</li>
+<li>JdbcTemplate</li>
+<li>Mybatis</li>
+<li>redis+MongoDB：nosql 数据库</li>
+<li>用缓存应对高并发</li>
 </ul>
 
       
@@ -524,7 +611,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -546,7 +633,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -579,7 +666,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Boot-特点"><span class="nav-number">1.</span> <span class="nav-text">Spring Boot 特点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Boot-特点"><span class="nav-number">1.1.</span> <span class="nav-text">Spring Boot 特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性配置"><span class="nav-number">1.1.1.</span> <span class="nav-text">属性配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller-的使用"><span class="nav-number">1.1.2.</span> <span class="nav-text">Controller 的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#映射-URL"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">映射 URL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取参数"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">获取参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库操作"><span class="nav-number">1.1.3.</span> <span class="nav-text">数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Restful-接口"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">Restful 接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务管理"><span class="nav-number">1.1.4.</span> <span class="nav-text">事务管理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web-进阶"><span class="nav-number">2.</span> <span class="nav-text">web 进阶</span></a></li></ol></div>
             
 
           </div>

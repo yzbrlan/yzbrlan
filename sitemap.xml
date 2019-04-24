@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yzbrlan.github.io/2019/04/24/Restful%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2019-04-24T07:53:09.380Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yzbrlan.github.io/2019/04/15/Spring%20Boot%20%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2019-04-24T03:50:05.341Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yzbrlan.github.io/2019/04/21/XML%E5%AD%A6%E4%B9%A0%E6%89%8B%E5%86%8C/</loc>
     
     <lastmod>2019-04-21T13:28:02.483Z</lastmod>
@@ -33,13 +47,6 @@
     <loc>https://yzbrlan.github.io/2019/04/15/Maven%E5%AD%A6%E4%B9%A0/</loc>
     
     <lastmod>2019-04-15T15:54:00.250Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yzbrlan.github.io/2019/04/15/Spring%20Boot%20%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2019-04-15T12:01:23.700Z</lastmod>
     
   </url>
   
