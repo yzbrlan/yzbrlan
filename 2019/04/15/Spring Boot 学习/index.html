@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Sherlock的成长之路">
 <meta property="og:description" content="关于学习Spring Boot的一些思考">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-24T03:50:05.341Z">
+<meta property="og:updated_time" content="2019-04-29T12:55:28.547Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Boot学习">
 <meta name="twitter:description" content="关于学习Spring Boot的一些思考">
@@ -483,6 +483,71 @@
 <li>redis+MongoDB：nosql 数据库</li>
 <li>用缓存应对高并发</li>
 </ul>
+<h2 id="Valid-表单验证"><a href="#Valid-表单验证" class="headerlink" title="@Valid 表单验证"></a>@Valid 表单验证</h2><p>@Valid 和@BindingResult 一大利器</p>
+<h2 id="AOP-统一处理请求日志"><a href="#AOP-统一处理请求日志" class="headerlink" title="AOP 统一处理请求日志"></a>AOP 统一处理请求日志</h2><h3 id="AOP-是一种程序的设计思想"><a href="#AOP-是一种程序的设计思想" class="headerlink" title="AOP 是一种程序的设计思想"></a>AOP 是一种程序的设计思想</h3><p>POP：面向过程<br>OOP：面向对象<br>AOP：面向切面</p>
+<p>将通用逻辑从业务逻辑中分出来</p>
+<ul>
+<li>增加 aop 的依赖</li>
+<li>增加处理文件 aspect</li>
+</ul>
+<p>面向切面编程，增加 url 的切点，在之前和之后进行处理验证</p>
+<p>@Slf4j：类注解，处理日志</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Pointcut</span>(<span class="string">"execution(public * edu.fudan.advancedweb.web3d.controller.UserController.findById(..))"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">log</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Before</span>(<span class="string">"log()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doBefore</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"1111"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@After</span>(<span class="string">"log()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doAfter</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"2222"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>@AfterReturning(returning = “object”, pointcut = “log()”)：返回之后的对象</li>
+</ul>
+<h3 id="统一异常处理"><a href="#统一异常处理" class="headerlink" title="统一异常处理"></a>统一异常处理</h3><p>将返回的信息进行包装，成为：code，msg，data</p>
+<p>Spring 只对 RuntimeException，</p>
+<p>当我们需要修改返回的 error 的 httpstatus 时，注意，有时候会出现自定义的错误，但是 status 为 200，只需要在一行的捕获下面，加上@ResponseStatus(HttpStatus.***)可。</p>
+<h1 id="项目优化"><a href="#项目优化" class="headerlink" title="项目优化"></a>项目优化</h1><h2 id="ab-压测模拟并发"><a href="#ab-压测模拟并发" class="headerlink" title="ab 压测模拟并发"></a>ab 压测模拟并发</h2><p>用 Apache 进行压测</p>
+<ul>
+<li><p>ab -n 100 -c 100 url(-n 表示 100 个请求，-c 表示 100 个并发。相当于 100 个人同时进行请求)</p>
+</li>
+<li><p>-t 60。表示 60s 内不停地模拟</p>
+</li>
+<li><p>使用 synchronized：解决了问题，降低了性能。数据安全是第一位。</p>
+</li>
+<li>无法做得到细粒度的控制</li>
+<li>只适合单点的情况</li>
+</ul>
+<h2 id="redis-分布式锁"><a href="#redis-分布式锁" class="headerlink" title="redis 分布式锁"></a>redis 分布式锁</h2><ul>
+<li>setnx：set if not exist，不成立的时候来建立锁</li>
+<li><p>getset：先 get，再次 set。返回原来的值，设置新的值。</p>
+</li>
+<li><p>支持高可用，分布式集群</p>
+</li>
+<li>更细粒度的锁</li>
+<li>多台机器上多个进程对一个数据进行操作的互斥</li>
+<li>他可以做分布式锁一个重要原因是它是单线程的</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">lock</span><span class="params">(String key, String value)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//已经加锁成功了</span></span><br><span class="line">    <span class="keyword">if</span> (redisTemplate.opsForValue().setIfAbsent(key, value)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    String currentValue = redisTemplate.opsForValue().get(key);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果过期。这段代码就是CAS，乐观锁的实现。解决的是两个线程同时进入</span></span><br><span class="line">    <span class="comment">//的情况。</span></span><br><span class="line">    <span class="keyword">if</span> (!StringUtils.isEmpty(currentValue) &amp;&amp; Long.parseLong(currentValue) &lt; System.currentTimeMillis()) &#123;</span><br><span class="line">        String oldValue = redisTemplate.opsForValue().getAndSet(key, value);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取上一个锁的时间</span></span><br><span class="line">        <span class="keyword">if</span> (!StringUtils.isEmpty(oldValue) &amp;&amp; oldValue.equals(currentValue)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">(String key, String value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        String currentValue = redisTemplate.opsForValue().get(key);</span><br><span class="line">        <span class="keyword">if</span> (!StringUtils.isEmpty(currentValue) &amp;&amp; currentValue.equals(value)) &#123;</span><br><span class="line">            redisTemplate.opsForValue().getOperations().delete(key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        log.error(<span class="string">"【redis 分布式锁】解锁异常"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Redis-缓存"><a href="#Redis-缓存" class="headerlink" title="Redis 缓存"></a>Redis 缓存</h2><ul>
+<li>命中</li>
+<li>失效：时间到了</li>
+<li>更新</li>
+</ul>
+<p>进行缓存需要实现序列化</p>
+<ul>
+<li>@Cacheable(cacheName=”userList”,key=”123”);</li>
+<li>@CachePut(cacheName=”userList”,key=”123”);</li>
+<li>@CacheEvict(cacheName=”userList”,key=”123”);</li>
+<li>类上面的@CacheConfig(cacheName=”userList”);<br>取消下面的 cacheName</li>
+</ul>
+<p>@Cacheable 中</p>
+<ul>
+<li>key 可以动态，key=”#sellerId”</li>
+<li>condition=”#sellerId &gt; 30”</li>
+<li><p>unless=”#result.getCode()!=0”(当返回 code 为 0 的时候，进行缓存)</p>
+</li>
+<li><p>建表用 sql，不用 JPA 建表</p>
+</li>
+<li>慎用@OneToMany 等，表的关系根据逻辑控制</li>
+</ul>
+<p>mybatis：</p>
+<ul>
+<li>注解</li>
+<li>xml</li>
+</ul>
 
       
     </div>
@@ -611,7 +676,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -622,7 +687,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -633,7 +698,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -666,7 +731,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Boot-特点"><span class="nav-number">1.1.</span> <span class="nav-text">Spring Boot 特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性配置"><span class="nav-number">1.1.1.</span> <span class="nav-text">属性配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller-的使用"><span class="nav-number">1.1.2.</span> <span class="nav-text">Controller 的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#映射-URL"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">映射 URL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取参数"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">获取参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库操作"><span class="nav-number">1.1.3.</span> <span class="nav-text">数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Restful-接口"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">Restful 接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务管理"><span class="nav-number">1.1.4.</span> <span class="nav-text">事务管理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web-进阶"><span class="nav-number">2.</span> <span class="nav-text">web 进阶</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Boot-特点"><span class="nav-number">1.1.</span> <span class="nav-text">Spring Boot 特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性配置"><span class="nav-number">1.1.1.</span> <span class="nav-text">属性配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller-的使用"><span class="nav-number">1.1.2.</span> <span class="nav-text">Controller 的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#映射-URL"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">映射 URL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取参数"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">获取参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库操作"><span class="nav-number">1.1.3.</span> <span class="nav-text">数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Restful-接口"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">Restful 接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务管理"><span class="nav-number">1.1.4.</span> <span class="nav-text">事务管理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web-进阶"><span class="nav-number">2.</span> <span class="nav-text">web 进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Valid-表单验证"><span class="nav-number">2.1.</span> <span class="nav-text">@Valid 表单验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP-统一处理请求日志"><span class="nav-number">2.2.</span> <span class="nav-text">AOP 统一处理请求日志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP-是一种程序的设计思想"><span class="nav-number">2.2.1.</span> <span class="nav-text">AOP 是一种程序的设计思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统一异常处理"><span class="nav-number">2.2.2.</span> <span class="nav-text">统一异常处理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目优化"><span class="nav-number">3.</span> <span class="nav-text">项目优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ab-压测模拟并发"><span class="nav-number">3.1.</span> <span class="nav-text">ab 压测模拟并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis-分布式锁"><span class="nav-number">3.2.</span> <span class="nav-text">redis 分布式锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-缓存"><span class="nav-number">3.3.</span> <span class="nav-text">Redis 缓存</span></a></li></ol></li></ol></div>
             
 
           </div>

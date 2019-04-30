@@ -4,20 +4,16 @@
 
     
   <url>
-    <loc>https://yzbrlan.github.io/2019/04/24/Restful%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2019-04-24T10:35:47.804Z</lastmod>
+    <loc>https://yzbrlan.github.io/2019/04/15/Spring%20Boot%20%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2019-04-29T12:55:28.547Z</lastmod>
     <data>
         <display>
-        <title>Restful学习</title>
-        <pubTime>2019-04-24T03:51:42.562Z</pubTime>
+        <title>Spring Boot学习</title>
+        <pubTime>2019-04-15T10:36:56.357Z</pubTime>
         
         <tag>Spring Boot</tag>
          
         <tag>Spring Cloud</tag>
-         
-        <tag>Maven</tag>
-         
-        <tag>Restful</tag>
          
          
            
@@ -30,16 +26,20 @@
 
     
   <url>
-    <loc>https://yzbrlan.github.io/2019/04/15/Spring%20Boot%20%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2019-04-24T03:50:05.341Z</lastmod>
+    <loc>https://yzbrlan.github.io/2019/04/24/Restful%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2019-04-25T06:43:50.267Z</lastmod>
     <data>
         <display>
-        <title>Spring Boot学习</title>
-        <pubTime>2019-04-15T10:36:56.357Z</pubTime>
+        <title>Restful学习</title>
+        <pubTime>2019-04-24T03:51:42.562Z</pubTime>
         
         <tag>Spring Boot</tag>
          
         <tag>Spring Cloud</tag>
+         
+        <tag>Restful</tag>
+         
+        <tag>Maven</tag>
          
          
            
@@ -407,28 +407,6 @@
            
              
               <breadCrumb title="课程实验" url="https://yzbrlan.github.io/categories/%E8%AF%BE%E7%A8%8B%E5%AE%9E%E9%AA%8C/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://yzbrlan.github.io/2019/03/05/%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2019-03-28T13:12:02.152Z</lastmod>
-    <data>
-        <display>
-        <title>字节跳动，腾讯，阿里面试整理</title>
-        <pubTime>2019-03-05T09:00:00.000Z</pubTime>
-        
-        <tag>后台开发</tag>
-         
-        <tag>Java</tag>
-         
-         
-           
-             
-              <breadCrumb title="面试" url="https://yzbrlan.github.io/categories/%E9%9D%A2%E8%AF%95/"/>
           
         </display>
     </data>
